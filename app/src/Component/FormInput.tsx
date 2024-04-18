@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { InputProperties } from "./InputObject";
 
-const InputForm: React.FC<InputProperties> = (props) => {
+const FormInput: React.FC<InputProperties> = (props) => {
     return (
         <>
             <p className={props.boxLabelStyle}>{props.label}</p>
@@ -16,4 +15,4 @@ const InputForm: React.FC<InputProperties> = (props) => {
     );
 };
 
-export default InputForm;
+export default FormInput;

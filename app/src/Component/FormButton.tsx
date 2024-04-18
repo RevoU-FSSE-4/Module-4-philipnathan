@@ -1,12 +1,21 @@
-import { useState } from "react";
+interface FormButtonProps {
+    onNext: () => void;
+    onPrevious: () => void;
+}
 
 const buttonStyle: string = "border-solid border border-black";
 
-const FormButton = () => {
+const FormButton: React.FC<FormButtonProps> = ({ onNext, onPrevious }) => {
     return (
         <div>
-            <button className={buttonStyle}>Previous</button>
-            <input type="submit"></input>
+            <button className={buttonStyle} onClick={onPrevious}>
+                Previous
+            </button>
+            <input
+                className={buttonStyle}
+                onClick={onNext}
+                type="submit"
+            ></input>
         </div>
     );
 };
