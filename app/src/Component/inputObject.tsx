@@ -7,7 +7,6 @@ export interface InputProperties {
     id: string;
     boxStyle?: string;
     boxLabelStyle?: string;
-    validator?: string;
 }
 
 const personalInformation: InputProperties[] = [
