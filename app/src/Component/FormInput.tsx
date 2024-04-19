@@ -1,29 +1,27 @@
-import React, { useState } from "react";
 import { InputProperties } from "./InputObject";
 
-interface Value {
-    [key: string]: string;
+interface FormInputProps {
+    currentValue: { [key: string]: any };
+    setCurrentValue: (inputId: string, inputValue: string) => void;
+    data: InputProperties;
 }
 
-const FormInput: React.FC<InputProperties> = (props) => {
-    const [currentValue, setCurrentValue] = useState<Value>({});
-
-    const handleChangeValue = (inputId: string, inputValue: string) => {
-        setCurrentValue((value) => {
-            console.log(currentValue);
-            return { ...value, [inputId]: inputValue };
-        });
-    };
-
+const FormInput: React.FC<FormInputProps> = ({
+    currentValue,
+    setCurrentValue,
+    data,
+}) => {
     return (
         <>
-            <p className={props.boxLabelStyle}>{props.label}</p>
+            <p className={data.boxLabelStyle}>{data.label}</p>
             <input
-                value={currentValue[props.id]}
-                onChange={(e) => handleChangeValue(props.id, e.target.value)}
-                type={props.type}
-                id={props.id}
-                className={props.boxStyle}
+                value={currentValue[data.id] || ""}
+                onChange={(event) =>
+                    setCurrentValue(data.id, event.target.value)
+                }
+                type={data.type}
+                id={data.id}
+                className={data.boxStyle}
                 required
             ></input>
             <br></br>

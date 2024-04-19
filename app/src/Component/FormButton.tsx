@@ -11,11 +11,9 @@ const FormButton: React.FC<FormButtonProps> = ({ onNext, onPrevious }) => {
             <button className={buttonStyle} onClick={onPrevious}>
                 Previous
             </button>
-            <input
-                className={buttonStyle}
-                onClick={onNext}
-                type="submit"
-            ></input>
+            <button className={buttonStyle} onClick={onNext}>
+                Next
+            </button>
         </div>
     );
 };
