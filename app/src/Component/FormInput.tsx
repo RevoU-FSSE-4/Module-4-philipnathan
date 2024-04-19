@@ -24,7 +24,6 @@ const FormInput: React.FC<FormInputProps> = ({
                 className={data.boxStyle}
                 required
             ></input>
-            <br></br>
         </>
     );
 };

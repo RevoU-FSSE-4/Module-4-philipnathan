@@ -5,7 +5,7 @@ export interface InputValueContainer {
     street: string;
     city: string;
     state: string;
-    zip: number;
+    zip: string;
     username: string;
     password: string;
 }

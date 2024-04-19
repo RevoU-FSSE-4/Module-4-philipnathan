@@ -56,8 +56,8 @@ const addressInformation: InputProperties[] = [
         boxLabelStyle: boxLabelStyle,
     },
     {
-        label: "Zip Code",
-        type: "number",
+        label: "Zip Code (5 number)",
+        type: "text",
         id: "zip",
         boxStyle: boxStyle,
         boxLabelStyle: boxLabelStyle,

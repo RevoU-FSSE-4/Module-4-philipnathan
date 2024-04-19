@@ -2,8 +2,15 @@ import { useState } from "react";
 import FormButton from "./FormButton";
 import FormInputMaker from "./FormInputMaker";
 import { InputValueContainer } from "./MainFormInterface";
+import {
+    isPageOneNotFilled,
+    isPageTwoNotFilled,
+    isPageThreeNotFilled,
+} from "./FormValidation";
 
-// const formContainerStyle: string = "flex flex-col justify-between";
+const formContainerStyle: string = "flex flex-col justify-between w-52";
+const inputContainerStyle: string = "flex flex-col justify-center";
+const buttonContainerStyle: string = "flex justify-between mt-4 mb-4";
 
 const MainForm = () => {
     const [currentPage, setCurrentPage] = useState<number>(0);
@@ -23,11 +30,11 @@ const MainForm = () => {
     const [currentValue, setCurrentValue] = useState<InputValueContainer>({
         fullName: "",
         email: "",
-        date: new Date(),
+        date: new Date(0),
         street: "",
         city: "",
         state: "",
-        zip: 0,
+        zip: "",
         username: "",
         password: "",
     });
@@ -38,23 +45,43 @@ const MainForm = () => {
         });
     };
 
+    const formChecker = (
+        value = currentValue,
+        pageNumber = currentPage
+    ): boolean => {
+        switch (pageNumber) {
+            case 0:
+                return isPageOneNotFilled(value);
+            case 1:
+                return isPageTwoNotFilled(value);
+            case 2:
+                return isPageThreeNotFilled(value);
+            default:
+                return true;
+        }
+    };
+
     return (
         <section>
-            <form action="">
-                <div>
+            <form action="" className={formContainerStyle}>
+                <div className={inputContainerStyle}>
                     <FormInputMaker
                         currentPage={currentPage}
                         currentValue={currentValue}
                         setCurrentValue={handleChangeValue}
                     />
                 </div>
-                <div>
+                <div className={buttonContainerStyle}>
                     <FormButton
                         onNext={handleNext}
                         onPrevious={handlePrevious}
+                        pageNumber={currentPage}
+                        isNotFilled={formChecker()}
+                        //isPageOneNotFilled()
                     />
                 </div>
             </form>
+            <h2>{JSON.stringify(currentValue.date)}</h2>
         </section>
     );
 };
