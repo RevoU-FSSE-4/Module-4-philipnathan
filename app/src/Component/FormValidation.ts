@@ -1,10 +1,11 @@
 import { InputValueContainer } from "./MainFormInterface";
-import * as EmailValidator from "email-validator";
+const validator = require("validator");
 
 export const isPageOneNotFilled = (value: InputValueContainer): boolean => {
     return (
-        isFullnameNotFilled(value.fullName) || isEmailNotFilled(value.email)
-        // isDateNotFilled(value.date)
+        isFullnameNotFilled(value.fullName) ||
+        isEmailNotFilled(value.email) ||
+        isDateNotFilled(value.birth)
     );
 };
 
@@ -12,11 +13,14 @@ const isFullnameNotFilled = (value: string): boolean => {
     return value === "";
 };
 const isEmailNotFilled = (value: string): boolean => {
-    return !EmailValidator.validate(value);
+    return !validator.isEmail(value);
 };
-// const isDateNotFilled = (value: Date): boolean => {
-//     return value === new Date(0);
-// };
+const isDateNotFilled = (value: Date): boolean => {
+    return (
+        !validator.isBefore(value.toString(), new Date().toString()) ||
+        !validator.isAfter(value.toString(), new Date(0).toString())
+    );
+};
 
 export const isPageTwoNotFilled = (value: InputValueContainer): boolean => {
     return (

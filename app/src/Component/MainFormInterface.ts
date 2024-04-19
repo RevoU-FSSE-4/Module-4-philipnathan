@@ -1,7 +1,7 @@
 export interface InputValueContainer {
     fullName: string;
     email: string;
-    date: Date;
+    birth: Date;
     street: string;
     city: string;
     state: string;

@@ -30,7 +30,7 @@ const MainForm = () => {
     const [currentValue, setCurrentValue] = useState<InputValueContainer>({
         fullName: "",
         email: "",
-        date: new Date(0),
+        birth: new Date(0),
         street: "",
         city: "",
         state: "",
@@ -77,11 +77,9 @@ const MainForm = () => {
                         onPrevious={handlePrevious}
                         pageNumber={currentPage}
                         isNotFilled={formChecker()}
-                        //isPageOneNotFilled()
                     />
                 </div>
             </form>
-            <h2>{JSON.stringify(currentValue.date)}</h2>
         </section>
     );
 };
