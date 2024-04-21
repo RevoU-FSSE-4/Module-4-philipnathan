@@ -1,18 +1,21 @@
 import { useState } from "react";
-import FormButton from "./FormButton";
-import FormInputMaker from "./FormInputMaker";
-import { InputValueContainer } from "./MainFormInterface";
+import { Formik, Form, FormikProps } from "formik";
+import FormButton from "./ButtonComponents/FormButton";
+import FormInputMaker from "./FormInputComponents/FormInputMaker";
+import { MainFormInterface } from "./MainFormComponents/MainFormInterface";
+import StepperComponent from "./Stepper";
+import { validationSchema } from "./MainFormComponents/MainFormValidation";
 import {
-    isPageOneNotFilled,
-    isPageTwoNotFilled,
-    isPageThreeNotFilled,
-} from "./FormValidation";
+    formContainerStyle,
+    inputContainerStyle,
+    buttonContainerStyle,
+    stepperStyle,
+    sectionMainFormStyle,
+    formStyle,
+} from "./MainFormComponents/MainFormStyle";
+import { mainFormInitialValues } from "./MainFormComponents/MainFormInitialValue";
 
-const formContainerStyle: string = "flex flex-col justify-between w-52";
-const inputContainerStyle: string = "flex flex-col justify-center";
-const buttonContainerStyle: string = "flex justify-between mt-4 mb-4";
-
-const MainForm = () => {
+const MainForm: React.FC<{}> = () => {
     const [currentPage, setCurrentPage] = useState<number>(0);
     const handleNext = () => {
         if (currentPage === 2) {
@@ -27,59 +30,39 @@ const MainForm = () => {
         setCurrentPage(currentPage - 1);
     };
 
-    const [currentValue, setCurrentValue] = useState<InputValueContainer>({
-        fullName: "",
-        email: "",
-        birth: new Date(0),
-        street: "",
-        city: "",
-        state: "",
-        zip: "",
-        username: "",
-        password: "",
-    });
-
-    const handleChangeValue = (inputId: string, inputValue: string) => {
-        setCurrentValue((value) => {
-            return { ...value, [inputId]: inputValue };
-        });
-    };
-
-    const formChecker = (
-        value = currentValue,
-        pageNumber = currentPage
-    ): boolean => {
-        switch (pageNumber) {
-            case 0:
-                return isPageOneNotFilled(value);
-            case 1:
-                return isPageTwoNotFilled(value);
-            case 2:
-                return isPageThreeNotFilled(value);
-            default:
-                return true;
-        }
+    const handleReset = (values: MainFormInterface, action: any) => {
+        action.resetForm();
+        setCurrentPage(0);
     };
 
     return (
-        <section>
-            <form action="" className={formContainerStyle}>
-                <div className={inputContainerStyle}>
-                    <FormInputMaker
-                        currentPage={currentPage}
-                        currentValue={currentValue}
-                        setCurrentValue={handleChangeValue}
-                    />
-                </div>
-                <div className={buttonContainerStyle}>
-                    <FormButton
-                        onNext={handleNext}
-                        onPrevious={handlePrevious}
-                        pageNumber={currentPage}
-                        isNotFilled={formChecker()}
-                    />
-                </div>
-            </form>
+        <section className={sectionMainFormStyle}>
+            <Formik
+                initialValues={mainFormInitialValues}
+                onSubmit={handleReset}
+                validationSchema={validationSchema}
+            >
+                {(formikProps: FormikProps<MainFormInterface>) => (
+                    <div className={formContainerStyle}>
+                        <Form autoComplete="off" className={formStyle}>
+                            <div className={stepperStyle}>
+                                <StepperComponent pageNumber={currentPage} />
+                            </div>
+                            <div className={inputContainerStyle}>
+                                <FormInputMaker currentPage={currentPage} />
+                            </div>
+                            <div className={buttonContainerStyle}>
+                                <FormButton
+                                    onNext={handleNext}
+                                    onPrevious={handlePrevious}
+                                    pageNumber={currentPage}
+                                    meta={formikProps}
+                                />
+                            </div>
+                        </Form>
+                    </div>
+                )}
+            </Formik>
         </section>
     );
 };

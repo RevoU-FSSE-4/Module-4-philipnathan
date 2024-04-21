@@ -1,4 +1,4 @@
-const boxStyle: string = "border-solid border-black border rounded mb-2";
+const boxStyle: string = "border rounded-md mb-2";
 const boxLabelStyle: string = "text-base font-bold";
 
 export interface InputProperties {
