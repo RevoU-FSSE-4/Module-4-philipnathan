@@ -10,13 +10,13 @@ const loginButton: ButtonObjectInterface[] = [
         id: "registerButton",
         type: "button",
         label: "Create new account?",
-        style: "",
+        style: "text-xs",
     },
     {
         id: "inputLoginButton",
         type: "submit",
         label: "Login",
-        style: "border border-grey-900 rounded py-2 px-4",
+        style: "border border-grey-900 rounded py-2 px-4 text-xs",
     },
 ];
 
@@ -25,13 +25,13 @@ const registerButton: ButtonObjectInterface[] = [
         id: "loginButton",
         type: "button",
         label: "Already have an account?",
-        style: "",
+        style: "text-xs",
     },
     {
         id: "submitRegisterButton",
         type: "submit",
         label: "Register",
-        style: "",
+        style: "border border-grey-900 rounded py-2 px-4 text-xs",
     },
 ];
 

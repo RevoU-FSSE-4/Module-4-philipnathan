@@ -11,11 +11,11 @@ const MainInputButton: React.FC = () => {
     };
 
     const buttonMapping: () => React.ReactElement[] = () => {
-        return buttonObjectArray[pageChecker(subMenu)].map((data, index) => {
+        return buttonObjectArray[pageChecker(subMenu)].map((data, key) => {
             return (
                 <>
                     <ButtonStructure
-                        key={index}
+                        key={key}
                         id={data.id}
                         type={data.type}
                         label={data.label}
