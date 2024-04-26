@@ -23,6 +23,6 @@ export const loginFetch = async (email: string, password: string) => {
             throw new Error("Error");
         }
     } catch (error) {
-        alert(error);
+        console.log("Something error in loginFetch");
     }
 };

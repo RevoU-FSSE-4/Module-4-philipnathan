@@ -7,7 +7,7 @@ interface EditButtonInterface extends GridRenderCellParams {
 }
 
 const EditDeleteButton: React.FC<EditButtonInterface> = (param) => {
-    const onClick = async (id: string) => {
+    const onClickDelete = async (id: string) => {
         try {
             await deleteButtonFunction(id);
         } catch (error) {
@@ -17,8 +17,9 @@ const EditDeleteButton: React.FC<EditButtonInterface> = (param) => {
 
     return (
         <>
-            <button>Edit</button>
-            <button onClick={() => onClick(param.id.toString())}>Delete</button>
+            <button onClick={() => onClickDelete(param.id.toString())}>
+                Delete
+            </button>
         </>
     );
 };

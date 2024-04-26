@@ -7,16 +7,18 @@ export const tableColumns: GridColDef[] = [
         field: "category_name",
         headerName: "Title",
         sortable: true,
+        editable: true,
         flex: 1,
     },
     {
         field: "category_description",
         headerName: "Description",
+        editable: true,
         flex: 1,
     },
     {
         field: "edit",
-        headerName: "Edit",
+        headerName: "Delete",
         flex: 1,
         renderCell: (params: GridRenderCellParams) => (
             <EditDeleteButton {...params} param={params.row} />
