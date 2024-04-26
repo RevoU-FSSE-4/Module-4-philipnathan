@@ -34,6 +34,7 @@ const MainTable: React.FC<{}> = () => {
                 rows={dataArray}
                 columns={columns}
                 onCellEditStop={(param, event) => editCategory(param, event)}
+                autoHeight
             />
             <h1 className="mb-8 text-2xl text-white bg-black">
                 Untuk Edit: Langsung Edit dengan 'Double Click' pada Cell yang

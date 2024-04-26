@@ -3,6 +3,9 @@ import { getUserProfile } from "./getUserProfile";
 import { handleLogOut } from "./handleLogOut";
 import { useNavigate } from "react-router-dom";
 
+const navbarStyle: string =
+    "flex flex-row justify-end gap-4 p-4 bg-cyan-800 text-white";
+
 const Navbar: React.FC<{}> = () => {
     const [username, setUserName] = useState<string>("");
     const navigate = useNavigate();
@@ -26,7 +29,7 @@ const Navbar: React.FC<{}> = () => {
     };
 
     return (
-        <section>
+        <section className={navbarStyle}>
             <h2>Hi, {username}</h2>
             <button onClick={onClick}>Logout</button>
         </section>
